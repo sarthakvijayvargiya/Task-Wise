@@ -7,7 +7,7 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 <!-- Tools react vite , react ,react dom, context api, tailwind css,javascript , coolers , git, github, netilify vercel, debugging -->
-
+think of type conversion
 
 
 // add map in todolist instead app
@@ -15,3 +15,4 @@ Currently, two official plugins are available:
 //  do and learn debug of all type to understand better
 // do some error handleing
 // Add locale Storage concept
+// add error todo is empty

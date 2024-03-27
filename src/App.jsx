@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { TodoContextProvider } from "./context/TodoContext";
+import { TodoInput, TodoList } from "./components";
 
 function App() {
   const [todos, setTodos] = useState([]);
-
   const saveTodo = (todoContent) => {
     setTodos((prevValue) => [
       ...prevValue,
@@ -42,9 +42,17 @@ function App() {
       <TodoContextProvider
         value={{ todos, saveTodo, updateTodo, deleteTodo, completeTodo }}
       >
-        <div className="bg-[#7D5BA6] w-full h-dvh">
-          <div className="flex flex-col md:justify-center pt-10 md:pt-0 items-center h-dvh ml-4 mr-4">
-            hello
+        <div className="bg-[#7D5BA6] w-full h-full">
+          <div className="flex flex-col md:justify-center pt-10 md:pt-0 items-center min-h-screen ml-4 mr-4 ">
+            <TodoInput />
+            <div className="w-full md:w-[450px]">
+
+            {todos.map((item) => (
+              <div key={item.id}>
+                <TodoList todoItem={item} />
+              </div>
+            ))}
+            </div>
           </div>
         </div>
       </TodoContextProvider>
