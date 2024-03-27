@@ -3,11 +3,13 @@ import deleteImg from "../../assets/delete.svg";
 import save from "../../assets/save.svg";
 import edit from "../../assets/edit.svg";
 import { useState } from "react";
+import PropTypes from "prop-types";
+
 const TodoList = ({ todoItem }) => {
   const [isTodoEditable, setIsTodoEditable] = useState(false);
   const [todoMsg, setTodoMsg] = useState(todoItem.todoContent);
   const [todoCom, setTodoCom] = useState(todoItem.completed);
-  const {  updateTodo, deleteTodo, completeTodo } = useTodo();
+  const { updateTodo, deleteTodo, completeTodo } = useTodo();
 
   const handleUpdate = () => {
     updateTodo(todoItem.id, todoMsg);
@@ -22,10 +24,10 @@ const TodoList = ({ todoItem }) => {
     deleteTodo(todoItem.id);
   };
 
-const handleComplete=()=>{
-  setTodoCom(!todoCom)
-  completeTodo(todoItem.id)
-}
+  const handleComplete = () => {
+    setTodoCom(!todoCom);
+    completeTodo(todoItem.id);
+  };
   return (
     <>
       <div
@@ -57,18 +59,18 @@ const handleComplete=()=>{
           />
         </span>
         <span className="flex flex-row">
-          {!todoCom&&
-          <button
-          type="button"
-          onClick={isTodoEditable ? handleUpdate : handleEdit}
-          >
-            {isTodoEditable ? (
-              <img src={save} alt="Save" height={25} width={25} />
+          {!todoCom && (
+            <button
+              type="button"
+              onClick={isTodoEditable ? handleUpdate : handleEdit}
+            >
+              {isTodoEditable ? (
+                <img src={save} alt="Save" height={25} width={25} />
               ) : (
                 <img src={edit} alt="Edit" height={25} width={25} />
-                )}
-          </button>
-            }
+              )}
+            </button>
+          )}
           <button type="button" onClick={handleDelete}>
             <img src={deleteImg} alt="Delete" height={25} width={25} />
           </button>
@@ -80,5 +82,6 @@ const handleComplete=()=>{
 
 export default TodoList;
 
-/* ${todoCom ? `bg-green-800 line-through` : `bg-[#FC6471]`}
-${isTodoEditable ?  outline-1 rounded-lg pl-4` : `border-none`}`*/
+TodoList.propTypes = {
+  todoItem: PropTypes.string,
+};
