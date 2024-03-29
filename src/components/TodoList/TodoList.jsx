@@ -4,6 +4,7 @@ import save from "../../assets/save.svg";
 import edit from "../../assets/edit.svg";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
 
 const TodoList = ({ todoItem }) => {
   const [isTodoEditable, setIsTodoEditable] = useState(false);
@@ -11,9 +12,14 @@ const TodoList = ({ todoItem }) => {
   const [todoCom, setTodoCom] = useState(todoItem.completed);
   const { updateTodo, deleteTodo, completeTodo } = useTodo();
 
+  const notifyToast = () => {
+    toast.error("Item Cannot updated to be empty");
+  };
+
   const handleUpdate = () => {
-    updateTodo(todoItem.id, todoMsg);
-    setIsTodoEditable(!isTodoEditable);
+    todoMsg.length
+      ? (updateTodo(todoItem.id, todoMsg), setIsTodoEditable(!isTodoEditable))
+      : notifyToast();
   };
 
   const handleEdit = () => {
@@ -37,11 +43,24 @@ const TodoList = ({ todoItem }) => {
           `}
       >
         <span className="pr-3 w-full flex flex-row justify-center items-center">
+          <ToastContainer
+            position="top-center"
+            autoClose={2000}
+            hideProgressBar={true}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
           <input
             className="outline-none border-none size-4 mr-3 accent-black"
             type="checkbox"
             id="checkbox"
-            onClick={handleComplete}
+            checked={todoCom}
+            onChange={handleComplete}
           />
           <input
             type="text"
@@ -83,5 +102,5 @@ const TodoList = ({ todoItem }) => {
 export default TodoList;
 
 TodoList.propTypes = {
-  todoItem: PropTypes.string,
+  todoItem: PropTypes.object,
 };

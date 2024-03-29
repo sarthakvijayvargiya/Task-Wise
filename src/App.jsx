@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodoContextProvider } from "./context/TodoContext";
 import { TodoInput, TodoList } from "./components";
 
@@ -37,6 +37,15 @@ function App() {
     );
   };
 
+  useEffect(() => {
+    const todosData = JSON.parse(localStorage.getItem("todos"));
+    todosData && todosData.length && setTodos(todosData);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+  
   return (
     <>
       <TodoContextProvider
@@ -46,12 +55,11 @@ function App() {
           <div className="flex flex-col md:justify-center pt-10 md:pt-0 items-center min-h-screen ml-4 mr-4 ">
             <TodoInput />
             <div className="w-full md:w-[450px]">
-
-            {todos.map((item) => (
-              <div key={item.id}>
-                <TodoList todoItem={item} />
-              </div>
-            ))}
+              {todos.map((item) => (
+                <div key={item.id}>
+                  <TodoList todoItem={item} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
